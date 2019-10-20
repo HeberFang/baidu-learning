@@ -1,0 +1,28 @@
+body {
+    width: 90%;
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+}
+h1{
+    color: white;
+}
+#part1 {
+    width: 25%;
+    height: auto;
+    float: left;
+    background-color: #3f8ef9;
+    text-align: center;
+}
+
+#part2 {
+    width: auto;
+    float: left;
+    margin-left: 1%;
+}
+ul{
+    list-style-type: none;
+}
+p{
+    line-height: 1em;
+}
