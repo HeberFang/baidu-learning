@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    header{
+        background-color: #333333;
+        height: 80px;
+    }
+    #centera-area{
+        position: relative;
+        height: 100%;
+        margin: 0 15%;
+        max-width: 960px;
+        /* 960px的定宽不美观 */
+    }
+    #logo{
+        color: white;
+        display: inline-block;
+    }
+    #login-nav {
+        border-spacing: 2px;
+        display: inline-block;
+        position: absolute;
+        top: 10px;
+        right: 0;
+    }
+    #login-nav a{
+        color: white;
+
+    }
+    #login-nav a:hover{
+        color: #d2d2d2;
+    }
+    #banner{
+        background-color: #66bb33;
+        min-height: 300px;
+        width: 100%;
+        position: relative;
+    }
+    #switch-nav{
+        position: absolute;
+        bottom: 20px;
+        right: 10%;
+    }
+    #switch-nav a{
+        display: inline-block;
+        width: 26px;
+        height: 30px;
+        background-color: rgba(255,255,255,0.5);
+        border: 1px solid black;
+        text-decoration: transparent;
+        line-height: 30px;
+        /* 字体行高与元素行高相同实现文字垂直居中 */
+        text-align: center;
+        /* 文字水平居中 */
+    }
+    #switch-nav a:hover{
+        /* height: 45px; 弃用，因为显示结果高度向下伸长 */
+        padding-top: 15px;
+        /* 显示选中元素的高度向上伸长*/
+        background-color: white;
+    }
+    main{
+        min-height: 700px;
+    }
+    #tabs-div{
+        position: relative;
+        height: 71px;
+        width: 100%;
+        border-bottom: 1px solid #e0dbdb;
+
+    }
+    #tabs{
+        position: absolute;
+        left: 15%;
+        width: 960px;
+
+        padding: 0;
+        font-size: 0;
+        margin-top: 20px;
+    }
+    #tabs li {
+        list-style: none;
+        display: inline-block;
+
+        /* float: left; 消除li横向间隙，可以但没必要，后期麻烦 */
+        font-size: 18px;
+        /* 消除li横向间隙- ul设置font-size: 0; */
+    }
+    #tabs li a{
+        color: black;
+        text-decoration: transparent;
+        display: inline-block;
+        border: 1px solid #e0dbdb;
+        width: 120px;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        border-radius: 1em 1em 0  0;
+        background-color: #eeebeb;
+    }
+    #tabs li a:hover, #tabs li a:focus{
+        background-color: white;
+        border-bottom: 1px solid white;
+    }
+    section{
+        margin: 0 15%;
+        /* width: 960px; */
+        /* 父元素定宽，flex子元素无法自适应 */
+        display: flex;
+        flex-wrap: wrap;
+
+
+    }
+    section div{
+        display: inline-block;
+        flex: 1;
+        text-align: center;
+        border: 1px solid #e0dbdb;
+        margin: 10px 10px 10px 0;
+        padding: 80px;
+    }
+    section div:nth-of-type(1),:nth-of-type(2){
+        flex: 100px;
+    }
+
+    footer{
+        background-color: #e0dbdb;
+        height: 120px;
+        display: flex;
+        align-items: center;
+
+    }
+    #copyright{
+        width: 100%;
+        text-align: center;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="centera-area">
+            <div id="logo">
+                <h1>LOGO</h1>
+            </div>
+            <div id="login-nav">
+                <a href="#">Github</a>
+                <a href="#">Register</a>
+                <a href="#">login</a>
+            </div>
+        </div>
+    </header>
+    <div id="banner">
+        <div id="switch-nav">
+            <a href="#">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+        </div>
+    </div>
+    <main>
+        <div id="tabs-div">
+            <ul id="tabs">
+                <li><a href="#">HOME</a></li>
+                <li><a href="#">PROFILE</a></li>
+                <li><a href="#">ABOUT</a></li>
+            </ul>
+        </div>
+        <section>
+            <div>content1</div>
+            <div>content2</div>
+            <div>content3</div>
+            <div>content4</div>
+            <div>content5</div>
+            <div>content6</div>
+            <div>content7</div>
+            <div>content8</div>
+            <div>content9</div>
+            <div>content10</div>
+        </section>
+    </main>
+    <footer>
+        <p id="copyright">© 2018 ife.baidu.com</p>
+    </footer>
+</body>
+</html>
