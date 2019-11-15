@@ -1,0 +1,542 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Nunito Sans', sans-serif;
+}
+html{
+    height: 100%;
+}
+body{
+    height: 100%;
+    display: flex;
+}
+.primary-menu{
+    width: 100px;
+    height: 100%;
+    background-color: #1d2531;
+    position: relative;
+    flex: 100px;
+}
+.menu-list ul{
+    list-style: none;
+    text-align: center;
+}
+.menu-list ul li{
+    margin-bottom: 20px;    
+    width: 100px;
+    height: 60px;
+    /* background-color: white; */
+    position: relative;
+}
+.menu-list ul li:nth-of-type(1){
+    padding-top: 20px;
+}
+
+.button-list{
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+}
+.button-list ul{
+    list-style: none;
+    text-align: center;
+}
+.button-list ul li{
+    display: inline-block;
+    margin: 6px;
+}
+.menu-selected::before{
+    content: url(../img/Active\ Highlight.png);
+    position: absolute;
+    left: -10px;
+    top: 40px;
+}
+.secondary-menu{
+    width: 250px;
+    height: 100%;
+    background-color: #222c3c;
+    padding-left: 20px;
+    position: relative;
+    flex-basis: 250px;
+    flex-shrink: 0;
+}
+.secondary-menu h1{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.3);
+}
+.secondary-menu h1::after{
+    content: url(../img/Settings.png);
+    float: right;
+    margin-right: 20px;
+}
+
+.secondary-menu ul{
+    list-style: none;
+}
+.secondary-menu li{
+    margin-bottom: 14px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+.secondary-menu li a{
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.7);
+}
+#menu-div{
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.havemessages::after{
+    content: "55";
+    text-align: center;
+    float: right;
+    color: white;
+    background-color: #1b92ec;
+    font-size: 12px;
+    border-radius: 12px;
+    width: 30px;
+    height: 20px;
+    line-height: 20px;
+    margin-right: 20px;
+   
+}
+.haveerror::after{
+    content: "!";
+    text-align: center;
+    float: right;
+    color: white;
+    background-color: #e44226;
+    font-size: 12px;
+    border-radius: 20px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    margin-right: 20px;
+   
+}
+#selected{
+    color: white;
+}
+#selected::before{
+    content: url(../img/Active\ Highlight.png);
+    position: absolute;
+    left: 0;
+}
+.secondary-menu li a:hover{
+    color: white;
+}
+
+#books::before{
+    content: url(../img/Book\ of\ Wisdom.png);
+    float: left;
+    margin-right: 10px;
+    width: 20px;
+}
+#tutorials::before{
+    content: url(../img/Video\ Camera.png);
+    float: left;
+    margin-right: 10px;
+    width: 20px;
+
+}
+#sotcks::before{
+    content: url(../img/Painting.png);
+    float: left;
+    margin-right: 10px;
+    width: 20px;
+
+}
+#infographics::before{
+    content: url(../img/Chart.png);
+    float: left;
+    margin-right: 10px;
+    width: 20px;
+
+}
+#product-div{
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+#goals-div{
+    position: absolute;
+    bottom: 20px;
+    left: 30px;
+}
+#goals-div p {
+    display: inline-block;
+    color: white;
+    font-size: 14px;
+    font-weight: 200;
+}
+#goals-div p:nth-of-type(1){
+    padding-right: 20px;
+}
+.progress-bar-layout{
+    margin-top: 10px;
+    height: 5px;
+    width: 200px;
+    background-color: #475364;
+    border-radius: 3px;
+}
+.progress-bar-content{
+    height: 100%;
+    width: 18%;
+    background: linear-gradient(to right,#815ee6,#9286d4);
+    border-radius: 3px;
+}
+main{
+    height: 100%;
+    flex: auto;
+    display: flex;
+}
+
+.left-div{
+    width: 400px;
+    height: 100%;
+    background-color: white;
+    float: left;
+    overflow: hidden;
+    flex-basis: 400px;
+    flex-shrink: 0;
+}
+.left-div h1{
+    box-sizing: border-box;
+    height: 80px;
+    padding: 20px;
+    font-size: 24px;
+}
+.search-box{
+    height: 70px;
+    text-align: center;
+    line-height: 70px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    padding-left: 20px;
+}
+.search-box input{
+    height: 36px;
+    width: 80%;
+}
+.search-box input::placeholder{
+    padding-left: 10px;
+}
+.search-box a{
+    position: relative;
+    left: -30px;
+    top: 3px;
+}
+.cotact-list-item{
+    padding: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+.cotact-list-item:hover{
+    cursor: pointer;
+}
+.cotact-list-item div:nth-of-type(1){
+    height: 46px;
+    margin-bottom: 5px;
+}
+.cotact-list-item div:nth-of-type(2){
+    width: 100%;
+}
+.cotact-list-item img{
+    float: left;
+}
+.cotact-list-item img::after{
+    content: " ";
+    clear: both;
+}
+.cotact-list-item h2{
+    position: relative;
+    left: 16px;
+    font-size: 16px;
+    color: black;
+    margin-top: 5px;
+}
+.cotact-list-item h3{
+    position: relative;
+    left: 14px;
+    font-size: 14px;
+    color:  rgba(0, 0, 0, 0.3);
+}
+.cotact-list-item p{
+    font-size: 14px;
+}
+.msg-sent-time{
+    float: right;
+    color:  rgba(0, 0, 0, 0.5);
+}
+.msg-sent-time::after{
+    content: " ";
+    clear: both;
+}
+.havemsg {
+    border-left: 5px solid #2399f1;
+}
+.havemsg h2{
+    color: #2399f1;
+}
+.havemsg h2::before{
+    content: url(../img/Status-1.png);
+    margin-right: 5px;
+    height: 24px;
+}
+.havemsg p{
+    width: 90%;
+    display: inline-block;
+}
+.havemsg div:nth-last-of-type(1)::after
+{
+    content: "5";
+    float: right;
+    margin-top: 6px;
+    color: white;
+    background-color: #1b92ec;
+    font-size: 14px;
+    width: 26px;
+    height: 26px;
+    line-height: 26px;
+    border-radius: 20px;
+    text-align: center;
+}
+.right-div{
+    height: 100%;
+    width: 100%;
+    
+}
+.profile-div{
+    height: 80px;
+}
+.profile-detail{
+    position: absolute;
+    right: 0;
+    display: flex;
+    margin-top: 20px;
+}
+.profile-detail div{
+    margin-right: 20px;
+}
+.profile-detail div:nth-of-type(1){
+    width: 46px;
+    height: 46px;
+    background-image: url(../img/Face8.png);
+    position: relative;
+}
+.profile-detail div:nth-of-type(1) img{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    border-radius: 10px;
+}
+.profile-detail h1{
+    font-size: 16px;
+    color: #1b92ec;
+}
+.profile-detail h2{
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.3);
+}
+.profile-detail img:nth-of-type(2){
+    float: right;
+}
+.tools-div{
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    height: 70px;
+}
+.tools-div p, .tools-div div, .tools-div li{
+    display: inline-block;
+}
+.tools-div h1{
+    display: inline-block;
+    font-size: 18px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.havenewmessage h1::after{
+    content: url(../img/Status-2.png);
+    float: right;
+    margin-left: 8px;
+}
+.tools-div ul{
+    list-style: none;
+    text-align: center;
+}
+.tools-div div{
+    display: inline-block;
+    border: 1px solid #b0b9c8;
+    box-shadow: grey 1px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .19), inset 0 1px 0 rgba(255, 255, 255, .4);
+}
+.tools{
+    position: absolute;
+    right: 180px;
+    margin-top: 15px;
+}
+.tools-div li{
+    padding: 8px;
+    width: 20px;
+    height: 20px;
+}
+.tools-div li:hover{
+    cursor: pointer;
+}
+.tools li:nth-of-type(2){
+    border-left: 1px solid #b0b9c8;
+    border-right: 1px solid #b0b9c8;
+}
+.tools-div p{
+    position: absolute;
+    right: 100px;
+    margin-top: 25px;
+    color:rgba(0, 0, 0, 0.7);
+    font-size: 14px;
+    font-weight: 800;
+}
+.pageTurning{
+    position: absolute;
+    right: 15px;
+    margin-top: 15px;
+}
+.pageTurning li:nth-of-type(1){
+    border-right: 1px solid #b0b9c8;
+}
+.openchat-div{
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    /* background-color: sandybrown; */
+    width: 100%;
+    position: relative;
+}
+.message-item{
+    margin-top: 20px;
+    display: flex;
+}
+.message-item div:nth-of-type(1){
+    display:inline-block;
+    margin-left: 20px;
+    margin-right: 20px;
+    vertical-align: top;
+    /* 解决inline-block图片下沉问题 */
+    padding-top: 10px;
+}
+.message-item div:nth-of-type(2){
+    margin-top: 10px;
+    display:inline-block;
+    width: 90%;
+}
+.message-item div:nth-of-type(2) h1{
+    display:inline-block;
+    margin-right: 20px;
+    font-size: 16px;
+}
+.message-item div:nth-of-type(2) span{
+    font-size: 14px;
+    color: #7f8fa4;
+}
+.message-item div:nth-of-type(2) p{
+    margin-top: 5px;
+    font-size: 14px;
+}
+.line{
+    height: 1px; 
+    margin-top: 20px;
+    text-align: center; 
+    border-top: 1px solid #e2e2e2;
+}
+.time-divide{
+    position: relative;
+    top:-12px;
+    background: #fff;
+    display: inline-block;
+    color: #7f8fa4;
+    border-left: 10px solid white;
+    border-right: 10px solid white;
+}
+.newmsgline{
+    height: 1px; 
+    margin-top: 20px;
+    text-align: center; 
+    border-top: 1px solid #2399f1;
+}
+.newmsg-divide{
+    position: relative;
+    top:-12px;
+    background: #fff;
+    display: inline-block;
+    color: #2399f1;
+    border-left: 10px solid white;
+    border-right: 10px solid white;
+}
+.message-item ul{
+    list-style: none;
+}
+.message-item li{
+    display: inline-block;
+}
+.pic1-content{
+    width: 156px;
+    height: 100px;
+    margin-left: 0 !important;
+}
+.pic1-content img{
+    width: 100%;
+    border-radius: 5px;
+}
+.pic2-content{
+    width: 156px;
+    height: 100px;
+    margin-left: 0 !important;
+    position: relative;
+}
+.pic2-content:hover mask{
+    opacity: 0;
+}
+.pic2-content img{
+    width: 100%;
+    border-radius: 5px;
+}
+.mask{
+    width: 156px;
+    height: 87.75px;
+    border-radius: 5px;
+    position: absolute;
+    background-color: grey;
+    padding: 0 !important;
+    top: 10px;
+    left: -20px;
+    opacity: 0.5;
+    text-align: center;
+    transition: 0.5s;
+}
+
+.mask div{
+    margin-top: 10px;
+    height: 50px;
+    width: 50px;
+}
+.mask div img:hover {
+    cursor: pointer;
+}
+.input-div{
+    width: calc(100%-750px);
+    margin-top: 10px;
+}
+.input-div img{
+    margin-left: 20px;
+    float: left;
+    box-sizing: border-box;
+    height: 50px;
+}
+.input-div img:hover{
+    cursor: pointer;
+}
+.input-div input{
+    float: left;
+    height: 46px;
+    width: 85%;
+    font-size: 14px;
+    padding-left: 20px;
+}
+
