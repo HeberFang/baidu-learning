@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>calc</title>
+
+</head>
+<body>
+    <input id="first-number" type="number" value="0" placeholder="第一个数字">
+    <input id="second-number" type="number" value="0" placeholder="第二个数字">
+    <button id="add-btn">加</button>
+    <button id="minus-btn">减</button>
+    <button id="times-btn">乘</button>
+    <button id="divide-btn">除</button>
+    <p id="result">运算结果</p>
+    <script>
+        var num1 = document.getElementById("first-number");
+        var num2 = document.getElementById("second-number");
+        var result;
+        var displayTimes = 0 ;
+        var outlength;
+        var resultContent = document.getElementById("result");
+        document.getElementById("add-btn").onclick=function(){
+            result = parseFloat(num1.value)+parseFloat(num2.value);
+            if(result>0){
+                outlength = (num1.length > num2.length ? num1.length : num2.length);
+            }else{
+                outlength = ((num1.length > num2.length ? num1.length : num2.length)+1);
+            }
+            result +="";
+            do {
+                result = result + "0";
+            } while (result.length<outlength);
+            result = result.substr(0,outlength);
+            ResultDisplay("+",result);
+        }
+        document.getElementById("minus-btn").onclick=function(){
+            result = parseFloat(num1.value)-parseFloat(num2.value);
+            if(result>0){
+                outlength = 4;
+            }else{
+                outlength = 5;
+            }
+            result +="";
+            do {
+                result = result + "0";
+            } while (result.length<outlength);
+            result = result.substr(0,outlength);
+            ResultDisplay("-",result);
+        }
+        document.getElementById("times-btn").onclick=function(){
+            result = parseFloat(num1.value)*parseFloat(num2.value);
+            if(result>0){
+                outlength = 4;
+            }else{
+                outlength = 5;
+            }
+            result +="";
+            do {
+                result = result + "0";
+            } while (result.length<outlength);
+            result = result.substr(0,outlength);
+            ResultDisplay("×",result);
+        }
+        document.getElementById("divide-btn").onclick=function(){
+            result = parseFloat(num1.value)/parseFloat(num2.value);
+            if(result>0){
+                outlength = 4;
+            }else{
+                outlength = 5;
+            }
+            result +="";
+            do {
+                result = result + "0";
+            } while (result.length<outlength);
+            result = result.substr(0,outlength);
+            ResultDisplay("÷",result);
+        }
+        function ResultDisplay(operate,result) {
+            if(displayTimes==0||displayTimes%5==0){
+                resultContent.innerHTML="";
+                resultContent.innerHTML=num1.value+operate+num2.value+"  运算结果是："+result+"<br>"
+                +resultContent.innerHTML;
+            }
+            else{
+                resultContent.innerHTML=num1.value+operate+num2.value+"  运算结果是："+result+"<br>"
+                +resultContent.innerHTML;
+            }
+            displayTimes++;
+        }
+    </script>
+</body>
+</html>

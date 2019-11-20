@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">    
+    <title>IFE ECMAScript</title>
+</head>
+<body>        
+    <input id="dec-number" type="number" placeholder="输入一个十进制非负整数">
+    <input id="bin-bit" type="number" placeholder="输入转化后二进制数字位数">
+    <button id="trans-btn">转化为二进制</button>
+    <button id="pa3-btn">PA3</button>
+    <button id="table-btn">99乘法表</button>
+    <p id="result">运算结果</p>
+    <script>
+
+    var decNumber = document.getElementById("dec-number");
+    var binbit = document.getElementById("bin-bit");
+    var transBtn = document.getElementById("trans-btn");
+    var pa3Btn = document.getElementById("pa3-btn");
+    var tableBtn = document.getElementById("table-btn");
+    var resultDisplay = document.getElementById("result");
+    var result="";
+    var lastnum;
+    var clicktimes=1;
+
+    function dec2bin(decNumber) {
+        // 在这里实现你的转化方法，注意需要判断输入必须为一个非负整数
+        do {
+            result = (decNumber%2) + result;
+            decNumber = Math.floor(decNumber/2);
+            lastnum = decNumber;
+        } while (decNumber >= 2);
+            result = lastnum + result;
+ 
+    }
+
+// 实现党点击转化按钮时，将输入的十进制数字转化为二进制，并显示在result的p标签内
+// 新的需求是，转化显示后的二进制数为bin-bit中输入的数字宽度，例如
+// dec-number为5，bin-bit为5，则转化后数字为00101
+// 如果bin-bit小于转化后的二进制本身位数，则使用原本的位数，如dec-number为5，bin-bit为2，依然输出101，但同时在console中报个错
+// Some coding
+    transBtn.onclick = function() {
+        if (decNumber.value < 0) {
+            alert("请输入非负整数");
+            decNumber.value ="";
+        } else {
+            dec2bin(decNumber.value);
+        }
+        if (result.length <= binbit.value) {
+            for (; result.length < binbit.value;) {
+                result = "0"+result;
+            }
+        } else {
+            console.log("！设置位数过短");
+        }
+        resultDisplay.innerHTML="运算结果<br>"+result;
+        result="";
+    }
+    pa3Btn.onclick= PA3;
+    function PA3(){
+        var i;
+        for (i = 1; i <= 100; i++) {
+            if (i%3==0 || (Math.floor(i/10))/3==1 || (i%10)/3==1) {
+                result = result + "PA,<br>";
+            } else {
+                result = result + i + ",";
+            }
+        }
+        console.log(result);
+        resultDisplay.innerHTML="3PA<br>"+result;    
+        result="";
+    }
+    tableBtn.onclick= multiplication;
+    function multiplication() {
+        result=result+("<table width='200px' border='1px''>");
+        for (let i = 1; i <= 9; i++) {
+            result=result+("<tr>");
+            for (let j = 1; j <= i; j++) {
+                // result=result+i+"*"+j+"="+i*j+" ";
+                result=result+("<td>"+ j +"*"+ i +"="+ i*j +"</td>");
+            }
+            // result=result+"<br>";
+            result=result+("</tr>");
+        }
+        result=result+("</table>");
+        resultDisplay.innerHTML="9x9乘法表<br>"+result;
+        result="";
+        if (clicktimes%2==1) {
+            tableBtn.innerHTML="9x9乘法表:on";
+        }else{
+            tableBtn.innerHTML="9x9乘法表:off";
+            resultDisplay.innerHTML="";
+        }
+        clicktimes++;
+    }
+    </script>
+</body>
+</html>
