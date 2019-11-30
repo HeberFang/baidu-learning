@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    .sprite{
+        width: 480px;
+        height: 480px;
+        margin: 0 auto;
+        background: url(../img/erik_ce204002.jpg);
+        background-repeat: no-repeat;
+        background-position: 0 0;
+    }
+    </style>
+</head>
+<body>
+    <div class="sprite"></div>
+    <script>
+    var displayArea = document.querySelector(".sprite");
+    var i = 0;
+    var j = 0;
+    var heightInterval = 480;
+
+    // document.querySelector("body").addEventListener("keypress",changePosition);
+    var t = setInterval(changePosition,50);
+    function changePosition() {
+        console.log("i="+i);
+        console.log("j="+j);
+        
+        if (  j % 2 == 0) {
+            if (i <= 15) {
+                i++;
+            }
+            else{
+                j++
+            }
+        }
+        else{
+            if (i > 0) {
+                i--;
+            }
+            else{
+                j++;
+            }
+        }
+        displayArea.style = "background-position: 0 "+(-heightInterval*i)+"px";
+        console.log(displayArea.style.backgroundPosition);    
+    }
+    </script>
+</body>
+</html>

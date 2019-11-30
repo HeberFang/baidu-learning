@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">    
+    <title>IFE ECMAScript</title>
+    <style>
+        select {
+            display: none;
+        }
+        .selected{
+            display: block;
+        }
+    </style>
+</head>
+<body>            
+    <label>
+        <input id="school" name="status" type="radio">
+        School
+    </label>
+    <label>
+        <input id="company" name="status" type="radio">
+        Company
+    </label>
+
+    <select id="school-select">        
+        <option>北京邮电大学</option>
+        <option>黑龙江大学</option>
+        <option>华中科技大学</option>
+    </select>
+
+    <select id="company-select">        
+        <option>百度</option>
+        <option>爱奇艺</option>        
+    </select>
+    <script>
+    var schoollist = document.querySelector("#school-select");
+    var companylist = document.querySelector("#company-select");
+    var body = document.querySelector("body");
+
+    // schoolradio.addEventListener("click",Clicktoshow);
+    // companyradio.addEventListener("click",Clicktoshow);
+    body.addEventListener("click",Clicktoshow);
+
+    function Clicktoshow(e) {
+        console.log(e.target);
+        //e返回鼠标事件，e.target才指向单选框。
+        console.log(this);
+        //this = e.target;
+        switch (e.target.id) {
+            case "school":
+            schoollist.setAttribute("class","selected");
+            companylist.setAttribute("class","");
+                break;
+            case "company":
+            companylist.setAttribute("class","selected");
+            schoollist.setAttribute("class","");
+                break;    
+            default:
+            companylist.setAttribute("class","");
+            schoollist.setAttribute("class","");
+                break;
+        }
+    }
+    </script>
+</body>
+</html>
