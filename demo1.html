@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="display" >display</div>
+
+    <script>
+    var mytimer = setInterval(getTime,1000);
+    var timestring = "";
+    var display = document.getElementById("display");
+    
+    function getTime(){
+        var mydate = new Date();
+        var y = mydate.getFullYear();
+        var month = mydate.getMonth()+1;
+        var date = mydate.getDate();
+        var day = mydate.getDay();
+        var h = mydate.getHours();
+        var m = mydate.getMinutes();
+        var s = mydate.getSeconds();
+        month = checkTime(month);
+        date = checkTime(date);
+        m = checkTime(m);
+        s = checkTime(s);
+        timestring = y+"年"+month+"月"+date+"日 星期"+day+" "+h+":"+m+":"+s;
+        display.innerHTML = timestring;
+    }
+    function checkTime(t){
+        if (t<10) { 
+            t= "0"+t;
+        }
+        return t;
+
+    }
+    
+    </script>
+</body>
+</html>
