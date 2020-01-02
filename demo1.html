@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        input{
+            width: 200px;
+            padding-left: 5px;
+            font-size: 14px;
+        }
+        .autolist{
+            border: 1px rgb(170, 169, 169) solid;
+            border-top: none;
+            width: 207px;
+            /* 205px+2(border宽度*2) 为了与input对齐 */
+        }
+        .hidden{
+            display: none;
+        }
+        ul{
+            padding: 0;
+            margin: 0;
+            width: 207px;
+            /* 与列表宽度一致 */
+        }
+        ul:hover{
+            cursor: pointer;
+        }
+
+        li{
+            list-style: none;
+            padding-left: 5px;
+            font-size: 14px;
+        }
+        li:hover{
+            background-color: aqua;;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+        <input id="email-input" type="text">
+        <div class="autolist">
+            <ul id="email-sug-wrapper" class="email-sug"></ul>
+        </div>
+    </div>
+    <script>
+    var input = document.getElementById("email-input");
+    var listparent = document.getElementById("email-sug-wrapper");
+    var postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net'];
+    var display = document.querySelector(".autolist");
+    var pointer;
+    input.focus();//自动获得焦点
+
+    input.oninput = function(e){
+        
+        var incontent = getContent();
+        var lilist = listparent.querySelectorAll("li");
+        var inputPostfix = input.value.split("@")[1]
+        // console.log(inputPostfix);
+        pointer = 0;
+        
+        //每次先清空列表
+        if (lilist.length) {
+            for (let index = 0; index < lilist.length; index++) {
+            const element = lilist[index];
+            listparent.removeChild(element);
+            }
+        }
+        //再创建相关列表
+        for (let index = 0; index < postfixList.length; index++) {
+            const element = postfixList[index];
+            if (inputPostfix == null) {
+                addli(incontent,element); 
+            }if (inputPostfix != null) {
+                inputPostfix = inputPostfix.trim();
+                if (element.indexOf(inputPostfix)==0) {
+                    addli(incontent,element);                
+                }
+            }
+        }
+        
+        
+        if (incontent != "") {
+            autolistShow();
+        }else{
+            autolistHidden();
+        }
+    }
+
+    input.onkeyup = function(e){
+        console.log(e.keyCode);
+        var lilist = listparent.querySelectorAll("li");
+        if (lilist.length) {
+            lilist[pointer].style.backgroundColor = "yellow";
+            switch (e.keyCode) {
+                case 40:
+                    lilist[pointer].style.backgroundColor = "";
+                    pointer = (pointer+1)%(lilist.length);
+                    lilist[pointer].style.backgroundColor = "yellow";
+                    console.log(pointer);
+                    break;
+
+                case 38:
+                    lilist[pointer].style.backgroundColor = "";
+                    pointer--;
+                    if (pointer < 0) {
+                        pointer = lilist.length-1;
+                    }
+                    pointer = pointer%(lilist.length);
+                    lilist[pointer].style.backgroundColor = "yellow";
+                    console.log(pointer);
+                    break;
+
+                case 13:
+                    input.value = lilist[pointer].innerHTML;
+                    removeli();
+                    break;
+
+                case 27:
+                    input.select();
+                    break;
+
+                default:
+                    break;
+            }
+            // if (e.keyCode == 40) {
+            //     lilist[pointer].style.backgroundColor = "";
+            //     pointer = (pointer+1)%(lilist.length);
+            //     lilist[pointer].style.backgroundColor = "yellow";
+            //     console.log(pointer);
+            // }
+            // if (e.keyCode == 38) {
+            //     lilist[pointer].style.backgroundColor = "";
+            //     pointer--;
+            //     if (pointer < 0) {
+            //         pointer = lilist.length-1;
+            //     }
+            //     pointer = pointer%(lilist.length);
+            //     lilist[pointer].style.backgroundColor = "yellow";
+            //     console.log(pointer);
+            // }
+            // if (e.keyCode == 13) {
+            //     input.value = lilist[pointer].innerHTML;
+            //     input.onfocus();
+            //     removeli();
+            // }
+            // if (e.keyCode == 27) {
+            //     input.select();
+            // }
+        }
+    }
+
+    input.onclick =function(e){
+        console.log(e.target);
+        e.target.select();
+    }
+
+    function addli(incontent,element){
+        var node = document.createElement("li");
+        var textnode = document.createTextNode(incontent+"@"+element);
+        node.appendChild(textnode);
+        listparent.appendChild(node);
+        listparent.lastChild.addEventListener("click",function(){
+        input.value = incontent+"@"+element;
+        removeli();
+        });         
+    }
+    function removeli(){
+        var lilist = listparent.querySelectorAll("li");
+        if (lilist.length) {
+            for (let index = 0; index < lilist.length; index++) {
+            const element = lilist[index];
+            listparent.removeChild(element);
+            }
+        }
+    }
+    function getContent(){
+        var incontent = ""+input.value;
+        var front;
+        if (incontent.indexOf("@")) {
+            front = incontent.split("@")[0];
+        }else{
+            front = incontent;
+        }
+        return front.trim();
+    }
+    function autolistHidden(){
+        display.setAttribute("class",display.className+" hidden");
+    }
+    function autolistShow(){
+        display.setAttribute("class","autolist");
+    }
+  
+    </script>
+</body>
+</html>
