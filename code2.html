@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+    td, th{
+        border:  1px black solid;
+        /* width: 40px;
+        height: 30px; */
+        text-align: center;
+    }
+    </style>
+    <title>简单表单</title>
+</head>
+<body>
+    <div id="checkbox">
+        <div id="region">
+            <input type="checkbox" name="region" value="all"><label>全选</label>
+            <input type="checkbox" name="region" value="华东"><label>华东</label>
+            <input type="checkbox" name="region" value="华北"><label>华北</label>
+            <input type="checkbox" name="region" value="华南"><label>华南</label>
+        </div>
+        <div id="product">
+            <input type="checkbox" name="product" value="all"><label>全选</label>
+            <input type="checkbox" name="product" value="手机"><label>手机</label>
+            <input type="checkbox" name="product" value="笔记本"><label>笔记本</label>
+            <input type="checkbox" name="product" value="智能音箱"><label>智能音箱</label>
+        </div>
+    </div>
+
+
+    <div id="table-wrapper"></div>
+
+    <script src="ife31data.js"></script>
+    <script>
+        var regionCheck = document.getElementById("region");
+        var regionChecklist = regionCheck.querySelectorAll("input");
+        var productCheck = document.getElementById("product");
+        var productChecklist = productCheck.querySelectorAll("input");
+        var checkbox = document.getElementById("checkbox");
+
+        var regionArr = new Array();
+        var ProductArr = new Array();
+        var combineArr = new Array();
+        var isProductFirst = true;
+        selectAll(regionChecklist);
+        selectAll(productChecklist);
+        createTable(sourceData);
+
+        checkbox.onclick = function(e){
+            if (e.target.type == "checkbox") {
+                regionArr = getCheckedArr(regionChecklist);
+                ProductArr = getCheckedArr(productChecklist);
+                isProductFirst = ProductArr.length > regionArr.length ? false : true;
+
+                combineArr = getData(regionArr,ProductArr);
+
+                if (!isProductFirst) {
+                    combineArr.sort(function(a,b){
+                        var value1 = a.regioncode,
+                            value2 = b.regioncode;
+                        if(value1 === value2){
+                            return b.sale[1] - a.sale[1];
+                        }
+                        return value2 - value1;
+                    });
+                }
+
+                createTable(combineArr);
+                mergeRows();
+            }
+        }
+        regionCheck.onclick = function(e){
+            if (e.target.type == "checkbox") {    
+                switch (e.target.value) {
+                    case regionChecklist[0].value:
+                        selectAll(regionChecklist);
+                        break;
+                    case regionChecklist[1].value:
+                        if (!(regionChecklist[2].checked||regionChecklist[3].checked)) {
+                            regionChecklist[1].checked = true;
+                        }
+                        isAllSelected(regionChecklist)
+                        break;
+                    case regionChecklist[2].value:
+                        if (!(regionChecklist[1].checked||regionChecklist[3].checked)) {
+                            regionChecklist[2].checked = true;
+                        }
+                        isAllSelected(regionChecklist)
+                        break;
+                    case regionChecklist[3].value:
+                        if (!(regionChecklist[2].checked||regionChecklist[1].checked)) {
+                            regionChecklist[3].checked = true;
+                        }
+                        isAllSelected(regionChecklist)
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        productCheck.onclick = function(e){
+            if (e.target.type == "checkbox") {    
+                switch (e.target.value) {
+                    case productChecklist[0].value:
+                    selectAll(productChecklist);
+                        break;
+                    case productChecklist[1].value:
+                        if (!(productChecklist[2].checked||productChecklist[3].checked)) {
+                            productChecklist[1].checked = true;
+                        }
+                        isAllSelected(productChecklist)
+                        break;
+                    case productChecklist[2].value:
+                        if (!(productChecklist[1].checked||productChecklist[3].checked)) {
+                            productChecklist[2].checked = true;
+                        }
+                        isAllSelected(productChecklist)
+                        break;
+                    case productChecklist[3].value:
+                        if (!(productChecklist[2].checked||productChecklist[1].checked)) {
+                            productChecklist[3].checked = true;
+                        }
+                        isAllSelected(productChecklist)
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+        }
+
+        function isAllSelected(list){
+            var judge=true;
+            for (let index = 1; index < list.length; index++) {
+                const element = list[index];
+                judge = judge&&element.checked;
+            }
+            if (judge) {
+                list[0].checked = true;
+            }else{
+                list[0].checked = false;
+            }
+        }
+
+        function selectAll(list){
+            for (let index = 0; index < list.length; index++) {
+                            const element = list[index];
+                            element.checked = true;
+                        }
+        }
+
+        function getCheckedArr(list){
+            var arr = new Array();
+            for (let index = 1; index < list.length; index++) {
+                const element = list[index];
+                if (element.checked == true) {
+                    arr.push(element.value);
+                }
+            }
+            return arr;
+        }
+
+        function getData(regionlist,productlist){
+            
+            var Targetarr = new Array();
+            var Temparr = new Array();
+            for (let index = 0; index < sourceData.length; index++) {
+                const element = sourceData[index];
+                for (let index = 0; index < regionlist.length; index++) {
+                    const tempelement = regionlist[index];                    
+                    if (element.region == tempelement) {
+                        Temparr.push(element);
+                    }
+                }
+            }
+            
+            for (let index = 0; index < Temparr.length; index++) {
+                const element = Temparr[index];
+                for (let index = 0; index < productlist.length; index++) {
+                    const tempelement = productlist[index];
+                    if (element.product == tempelement) {
+                        Targetarr.push(element);
+                    }
+                }
+            }
+            
+            return Targetarr;
+        }
+
+
+        function createTable(data){
+            var tablewrapper = document.getElementById("table-wrapper");
+            tablewrapper.innerHTML = "<table id='table1'></table>"
+            var table = document.getElementById("table1");
+            var cols = 14;
+
+            var thead=document.createElement('thead');
+            var theadvalue = ["商品","地区","1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"];
+            if(!isProductFirst){
+                var temp = theadvalue[0];
+                theadvalue[0] = theadvalue[1];
+                theadvalue[1] = temp;
+            }
+            var tr=document.createElement('tr');
+            for(var j=0;j<cols;j++){
+                var th=document.createElement('th');
+                var textnode = document.createTextNode(theadvalue[j]);
+                th.appendChild(textnode);
+                //将td节点插入到tr中
+                tr.appendChild(th);
+            }
+            thead.appendChild(tr);
+            table.appendChild(thead);
+
+            var tbody=document.createElement('tbody');
+            //创建行和列
+            var rows = data.length;
+            for(var i=0;i<rows;i++){
+                //创建tr节点
+                var tr=document.createElement('tr');
+                for(var j=0;j<cols;j++){
+                    var td=document.createElement('td');
+                    var content;
+                    switch (j) {
+                        case 0:
+                            if (isProductFirst) {
+                                content = data[i].product;
+                            }else{
+                                content = data[i].region;
+                            }
+                            break;
+                        case 1:
+                            if (isProductFirst) {
+                                content = data[i].region;
+                            }else{
+                                content = data[i].product;
+                            }
+                            break;
+                        default:
+                            content = data[i].sale[j-2];
+                            break;
+                    }
+                    var textnode = document.createTextNode(content);
+                    td.appendChild(textnode);
+                    //将td节点插入到tr中
+                    tr.appendChild(td);
+                }
+                //将tr节点插入到table中
+                tbody.appendChild(tr);
+                table.appendChild(tbody);
+            }
+        }
+
+        function deleteTable(){
+            var tablewrapper = document.getElementById("table-wrapper");
+            tablewrapper.innerHTML = "";
+        }
+
+        function mergeRows(){
+            var tbody = document.querySelector("tbody");
+            var list = tbody.querySelectorAll("tr");
+            var k=0;
+            for (let index = 0; index < list.length; index++) {
+                const element = list[index];
+                for (let j = index-1; j >= 0; j--) {
+                    const item = list[j];
+                    if (item.firstChild.innerText == element.firstChild.innerText) {
+                        item.firstChild.rowSpan++;
+                        element.deleteCell(0);
+                        break;
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

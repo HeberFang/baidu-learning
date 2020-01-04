@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+    td, th{
+        border:  1px black solid;
+        /* width: 40px;
+        height: 30px; */
+        text-align: center;
+    }
+    </style>
+    <title>简单表单</title>
+</head>
+<body>
+    <select id="region-select">
+        <option value="区域">区域</option>
+        <option value="华东">华东</option>
+        <option value="华南">华南</option>
+        <option value="华北">华北</option>
+    </select>
+    <select id="product-select">
+        <option value="产品">产品</option>
+        <option value="手机">手机</option>
+        <option value="笔记本">笔记本</option>
+        <option value="智能音箱">智能音箱</option>
+    </select>
+    <div id="table-wrapper"></div>
+
+    <script src="ife31data.js"></script>
+    <script>
+        var selectRegion = document.getElementById("region-select");
+        var selectProduct = document.getElementById("product-select");
+        var regionArr = new Array();
+        var ProductArr = new Array();
+        var combineArr = new Array();
+        createTable(sourceData);
+
+        selectRegion.onchange= function(){
+            regionArr = new Array();
+            combineArr = new Array();
+
+            regionArr = getData(selectRegion.value);
+            if (ProductArr.length) {
+                for (let index = 0; index < regionArr.length; index++) {
+                    const element = regionArr[index];
+                    if (element.product == selectProduct.value) {
+                        combineArr.push(element);
+                    }
+                }
+            }else{
+                combineArr = regionArr;
+            }
+            createTable(combineArr);
+        }
+
+        selectProduct.onchange= function(){
+            ProductArr = new Array();
+            combineArr = new Array();
+
+            ProductArr = getData(selectProduct.value);
+            if (regionArr.length) {
+                for (let index = 0; index < ProductArr.length; index++) {
+                    const element = ProductArr[index];
+                    if (element.region == selectRegion.value) {
+                        combineArr.push(element);
+                    }
+                }
+            }else{
+                combineArr = ProductArr;
+            }
+            createTable(combineArr);
+        }
+
+        function getData(value){
+            var arr = new Array();
+            for (let index = 0; index < sourceData.length; index++) {
+                const element = sourceData[index];
+                if (element.region == value || element.product == value) {
+                    arr.push(element);
+                }
+            }
+            return arr;
+        }
+        
+        function createTable(data){
+            var tablewrapper = document.getElementById("table-wrapper");
+            tablewrapper.innerHTML = "<table id='table1'></table>"
+            var table = document.getElementById("table1");
+            var cols = 14;
+
+            var thead=document.createElement('thead');
+            var theadvalue = ["商品","地区","1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"];
+            var tr=document.createElement('tr');
+            for(var j=0;j<cols;j++){
+                var th=document.createElement('th');
+                var textnode = document.createTextNode(theadvalue[j]);
+                th.appendChild(textnode);
+                //将td节点插入到tr中
+                tr.appendChild(th);
+            }
+            thead.appendChild(tr);
+            table.appendChild(thead);
+
+            var tbody=document.createElement('tbody');
+            //创建行和列
+            var rows = data.length;
+            for(var i=0;i<rows;i++){
+                //创建tr节点
+                var tr=document.createElement('tr');
+                for(var j=0;j<cols;j++){
+                    var td=document.createElement('td');
+                    var content;
+                    switch (j) {
+                        case 0:
+                            content = data[i].product;
+                            break;
+                        case 1:
+                            content = data[i].region;
+                            break;
+                        default:
+                            content = data[i].sale[j-2];
+                            break;
+                    }
+                    var textnode = document.createTextNode(content);
+                    td.appendChild(textnode);
+                    //将td节点插入到tr中
+                    tr.appendChild(td);
+                }
+                //将tr节点插入到table中
+                tbody.appendChild(tr);
+                table.appendChild(tbody);
+            }
+        }
+
+        function deleteTable(){
+            var tablewrapper = document.getElementById("table-wrapper");
+            tablewrapper.innerHTML = "";
+        }
+    </script>
+</body>
+</html>
